@@ -35,7 +35,7 @@
                     </div>
                     <button type="submit" name="create" class="btn btn-primary float-right">Log in</button>
                     <center>
-                        <p>doesnt have account? <a href="<?php echo base_url() . 'index.php/user/user/create_account'; ?>">Signup Here</a> </p>
+                        <p>doesnt have account? <a href="<?php echo base_url() . 'index.php/public/user/create_account'; ?>">Signup Here</a> </p>
                     <center>
                 </form>
             </div>
