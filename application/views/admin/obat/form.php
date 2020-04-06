@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title ?></title>
+    <?php $this->load->view('template/header'); ?>
 </head>
 <body>
-    <?php $this->load->view('template/header'); ?>
-    <?php $this->load->view('template/navbar', $jenis_obat); ?>    
+    <?php $this->load->view('template/navbar', $jenis_obat); ?>
     <div class="container">
         <h1 class="text-center"><?php echo $action ?></h1>
         <?php echo validation_errors(); ?>
@@ -17,7 +17,7 @@
                 <?php if ($action == 'TAMBAH OBAT BARU') : ?>
                     <input type="text" class="form-control" id="namaObat" placeholder="Masukkan nama obat" name="nama_obat">
                 <?php else : ?>
-                    <input type="text" class="form-control" id="namaObat" placeholder="Masukkan nama obat" 
+                    <input type="text" class="form-control" id="namaObat" placeholder="Masukkan nama obat"
                      name="nama_obat" value="<?php echo $nama_obat; ?>">
                 <?php endif ?>
             </div>
@@ -34,10 +34,10 @@
                 <?php if ($action == 'TAMBAH OBAT BARU') : ?>
                     <input type="number" class="form-control" id="hargaObat" placeholder="Masukkan harga obat" name="harga">
                 <?php else : ?>
-                    <input type="number" class="form-control" id="hargaObat" placeholder="Masukkan harga obat" name="harga" 
+                    <input type="number" class="form-control" id="hargaObat" placeholder="Masukkan harga obat" name="harga"
                      value="<?php echo $harga; ?>">
                 <?php endif ?>
-            </div>                                     
+            </div>
             <div class="form-group">
                 <label for="stokObat">Stok</label>
                 <?php if ($action == 'TAMBAH OBAT BARU') : ?>

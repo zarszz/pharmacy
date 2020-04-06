@@ -5,9 +5,9 @@ class Obat_model extends CI_Model
 {
     private $_table = 'obat';
 
-    public function insertNew($id_jenis)
+    public function insert_new($id_jenis)
     {
-        $id_obat = $this->generateIdJenis($id_jenis);
+        $id_obat = $this->generate_id_obat($id_jenis);
         $data = [
             "nama_obat" => $this->input->post('nama_obat', true),
             "id_jenis" => $id_jenis,
@@ -18,17 +18,17 @@ class Obat_model extends CI_Model
         $this->db->insert($this->_table, $data);
     }
 
-    public function getObatById($id_obat)
+    public function get_obat_by_id($id_obat)
     {
         return $this->db->get_where($this->_table, ['id_obat' => $id_obat])->result_array()[0];
     }
 
-    public function getAllData()
+    public function get_all_data()
     {
         return $this->db->get($this->_table)->result();
     }
 
-    public function countAllData()
+    public function count_all_data()
     {
         return $this->db->count_all($this->_table);
     }
@@ -54,7 +54,7 @@ class Obat_model extends CI_Model
             return null;
         }
     }
-    private function generateIdJenis($id)
+    private function generate_id_obat($id)
 	{
 		do {
 			$rand_id = $id . strval(rand(200, 3000));

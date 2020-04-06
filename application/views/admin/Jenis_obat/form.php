@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title ?></title>
+    <?php $this->load->view('template/header'); ?>
 </head>
 <body>
     <?php echo validation_errors(); ?>
-    <?php $this->load->view('template/header'); ?>
     <?php $this->load->view('template/navbar', $jenis_obat); ?>
     <div class="container">
         <h1 class="text-center"><?php echo $action ?></h1>

@@ -10,79 +10,109 @@ class Jenis_obat extends CI_Controller {
 
     public function index()
     {
-        $data['title'] = 'Admin - MANAGE JENIS OBAT';
-        $data['jenis_obat'] = $this->Jenis_obat_model->loadJenisObatData();
-        $this->load->view('admin/Jenis_obat/index', $data);
+        if($this->is_has_privilege()){
+            $data['title'] = 'Admin - MANAGE JENIS OBAT';
+            $data['jenis_obat'] = $this->Jenis_obat_model->get_jenis_obat();
+            $this->load->view('admin/Jenis_obat/index', $data);
+        } else {
+            redirect('page_not_found');
+        }
     }
 
     public function create()
     {
-        $data['action'] = 'TAMBAH JENIS OBAT BARU';
-        $data['title'] = 'Admin - TAMBAH JENIS OBAT';
-        $data['jenis_obat'] = $this->Jenis_obat_model->loadJenisObatData();
-        $this->form_validation->set_rules('jenis_obat', 'Jenis obat', 'required|min_length[5]');
-        $this->form_validation->set_rules('deskripsi', 'Deskripsi obat', 'required|min_length[10]');
-        $this->form_validation->set_rules('id_jenis', 'Id Jenis obat', 'required|min_length[3]');
-        if($this->form_validation->run() == false) {
-            $this->load->view('admin/Jenis_obat/form', $data);
-            $this->session->set_flashdata('flash');
+        if($this->is_has_privilege()){
+            $data['action'] = 'TAMBAH JENIS OBAT BARU';
+            $data['title'] = 'Admin - TAMBAH JENIS OBAT';
+            $data['jenis_obat'] = $this->Jenis_obat_model->get_jenis_obat();
+            $this->form_validation->set_rules('jenis_obat', 'Jenis obat', 'required|min_length[5]');
+            $this->form_validation->set_rules('deskripsi', 'Deskripsi obat', 'required|min_length[10]');
+            $this->form_validation->set_rules('id_jenis', 'Id Jenis obat', 'required|min_length[3]');
+            if($this->form_validation->run() == false) {
+                $this->load->view('admin/Jenis_obat/form', $data);
+                $this->session->set_flashdata('flash');
+            } else {
+                $this->Jenis_obat_model->insert_new();
+                redirect('/admin/jenis_obat/index');
+            }
         } else {
-            $this->Jenis_obat_model->insertNewJenisObat();
-            redirect('/admin/jenis_obat/index');
+            redirect('page_not_found');
         }
     }
 
     public function edit($id_jenis)
     {
-        $data['action'] = 'UPDATE JENIS OBAT';
-        $data['title'] = 'Admin - UPDATE JENIS OBAT';
-        $data['jenis_obat'] = $this->Jenis_obat_model->loadJenisObatData();
-        $this->form_validation->set_rules('jenis_obat', 'Jenis obat', 'required|min_length[5]');
-        $this->form_validation->set_rules('deskripsi', 'Deskripsi obat', 'required|min_length[10]');
-        $this->form_validation->set_rules('id_jenis', 'Id Jenis obat', 'required|min_length[3]');
-        if($this->form_validation->run() == false) {
-            $dataJenisObat = $this->Jenis_obat_model->getJenisById($id_jenis);
-            $data['jenis'] = $dataJenisObat['jenis_obat'];
-            $data['id_jenis'] = $dataJenisObat['id_jenis'];
-            $data['deskripsi'] = $dataJenisObat['deskripsi'];
-            $this->load->view('admin/Jenis_obat/form', $data);
-            $this->session->set_flashdata('flash');
+        if($this->is_has_privilege()){
+            $data['action'] = 'UPDATE JENIS OBAT';
+            $data['title'] = 'Admin - UPDATE JENIS OBAT';
+            $data['jenis_obat'] = $this->Jenis_obat_model->get_jenis_obat();
+            $this->form_validation->set_rules('jenis_obat', 'Jenis obat', 'required|min_length[5]');
+            $this->form_validation->set_rules('deskripsi', 'Deskripsi obat', 'required|min_length[10]');
+            $this->form_validation->set_rules('id_jenis', 'Id Jenis obat', 'required|min_length[3]');
+            if($this->form_validation->run() == false) {
+                $jenis_obat_data = $this->Jenis_obat_model->get_jenis_obat_by_id($id_jenis);
+                $data['jenis'] = $jenis_obat_data['jenis_obat'];
+                $data['id_jenis'] = $jenis_obat_data['id_jenis'];
+                $data['deskripsi'] = $jenis_obat_data['deskripsi'];
+                $this->load->view('admin/Jenis_obat/form', $data);
+                $this->session->set_flashdata('flash');
+            } else {
+                $this->Jenis_obat_model->update($id_jenis);
+                redirect('/admin/jenis_obat/index');
+            }
         } else {
-            $this->Jenis_obat_model->update($id_jenis);
-            redirect('/admin/jenis_obat/index');
+            redirect('page_not_found');
         }
     }
 
 	public function delete_ajax($id_jenis)
 	{
-		try {
-			if(!isset($id_jenis)){
-				$stats = 'fail';
-			} else {
-				$stats = $this->Jenis_obat_model->delete($id_jenis);
-				if($stats){
-					header('Content-Type: application/json');
-					echo json_encode(['status' => $stats]);
-				} else {
-					header('Content-Type: application/json');
-					echo json_encode(['status' => 'not found']);
-				}
-			}
-		} catch (\Throwable $th) {
-			echo json_encode(['status' => 'error']);
-		}
+        if($this->is_has_privilege()) {
+            try {
+                if(!isset($id_jenis)){
+                    $stats = 'fail';
+                } else {
+                    $stats = $this->Jenis_obat_model->delete($id_jenis);
+                    if($stats){
+                        header('Content-Type: application/json');
+                        echo json_encode(['status' => $stats]);
+                    } else {
+                        header('Content-Type: application/json');
+                        echo json_encode(['status' => 'not found']);
+                    }
+                }
+            } catch (\Throwable $th) {
+                echo json_encode(['status' => 'error']);
+            }
+        } else {
+			$this->output->set_status_header('404');
+			header('Content-Type: application/json');
+			echo json_encode(['error' => 'not found']);
+        }
+
 	}
 
     public function fetch_ajax()
     {
-        $dataCountTotal = $this->Jenis_obat_model->countAllData();
-        $data = $this->Jenis_obat_model->loadAllJenisObatData();
+        if($this->is_has_privilege()) {
+            $data_total = $this->Jenis_obat_model->count_all_data();
+            $data = $this->Jenis_obat_model->get_all_data();
 
-        $callback = array(
-            'recordsTotal' => $dataCountTotal,
-            'data' => $data
-        );
-        header('Content-Type: application/json');
-        echo json_encode($callback);
+            $callback = array(
+                'recordsTotal' => $data_total,
+                'data' => $data
+            );
+            header('Content-Type: application/json');
+            echo json_encode($callback);
+        } else {
+			$this->output->set_status_header('404');
+			header('Content-Type: application/json');
+			echo json_encode(['error' => 'not found']);
+        }
+    }
+
+    public function is_has_privilege()
+    {
+        return $_SESSION['role'] == 'admin' or $_SESSION['role'] == 'pegawai';
     }
 }

@@ -5,7 +5,7 @@ class Jenis_obat_model extends CI_Model
 {
     private $_table = 'jenis_obat';
 
-    public function insertNewJenisObat()
+    public function insert_new()
     {
         $data = [
             'jenis_obat' => $this->input->post('jenis_obat', true),
@@ -14,29 +14,29 @@ class Jenis_obat_model extends CI_Model
         ];
         return $this->db->insert($this->_table, $data);
     }
-    public function loadAllJenisObatData()
+    public function get_all_data()
     {
         return $this->db->get($this->_table)->result();
     }
 
-    public function countAllData()
+    public function count_all_data()
     {
         return $this->db->count_all($this->_table);
     }
 
-    public function loadJenisObatData()
+    public function get_jenis_obat()
     {
         $this->db->select('jenis_obat');
         return $this->db->get($this->_table)->result_array();
     }
 
-    public function loadJenisDataComplete()
+    public function get_jenis_data_complete()
     {
         $this->db->select('id_jenis, jenis_obat');
         return $this->db->get($this->_table)->result_array();
     }
 
-    public function getJenisById($id)
+    public function get_jenis_obat_by_id($id)
     {
         return $this->db->get_where($this->_table, ['id_jenis' => $id])->result_array()[0];
     }
