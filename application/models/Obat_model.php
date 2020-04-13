@@ -23,9 +23,25 @@ class Obat_model extends CI_Model
         return $this->db->get_where($this->_table, ['id_obat' => $id_obat])->result_array()[0];
     }
 
+    public function get_obat_by_jenis($id_jenis)
+    {
+        return $this->db->get_where($this->_table, ['id_jenis' => $id_jenis])->result_array()[0];
+    }
+
+    public function get_obat_by_jenis_offset($number, $offset, $id_jenis)
+    {
+        $this->db->where('id_jenis', $id_jenis);
+        return $this->db->get($this->_table, $number, $offset)->result_array();
+    }
+
     public function get_all_data()
     {
         return $this->db->get($this->_table)->result();
+    }
+
+    public function get_obat_by_offset($number, $offset)
+    {
+        return $this->db->get($this->_table, $number, $offset)->result_array();
     }
 
     public function count_all_data()
@@ -33,6 +49,11 @@ class Obat_model extends CI_Model
         return $this->db->count_all($this->_table);
     }
 
+    public function count_by_id_jenis($id_jenis){
+        $this->db->from($this->_table);
+        $this->db->where('id_jenis', $id_jenis);
+        return $this->db->count_all_results();
+    }
     public function update($id)
     {
         $data = [
@@ -54,6 +75,7 @@ class Obat_model extends CI_Model
             return null;
         }
     }
+
     private function generate_id_obat($id)
 	{
 		do {

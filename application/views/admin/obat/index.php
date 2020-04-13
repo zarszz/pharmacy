@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php $this->load->view("template/header.php", $title); ?>
-</head>
+<?php $data['title'] = $title; $this->load->view('template/header', $data); ?>
 <?php $this->load->view('template/navbar.php', $jenis_obat); ?>
 <body>
     <!-- <?php foreach ($obats as $obat):

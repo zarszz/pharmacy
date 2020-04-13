@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="margin-bottom: 30px;">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
       <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
               <a class="nav-link" href="<?php echo base_url() ?>">@POTIK</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Kategori
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">

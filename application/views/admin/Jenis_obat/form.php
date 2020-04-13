@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title ?></title>
-    <?php $this->load->view('template/header'); ?>
-</head>
+<?php $data['title'] = $title; $this->load->view('template/header', $data); ?>
 <body>
-    <?php echo validation_errors(); ?>
     <?php $this->load->view('template/navbar', $jenis_obat); ?>
     <div class="container">
         <h1 class="text-center"><?php echo $action ?></h1>
+        <?php
+            if(validation_errors()){
+                echo '<div class="alert alert-danger alert-dismissible fade show">';
+                echo validation_errors();
+                echo '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
+                echo '</div>';
+            }
+        ?>
         <form action="" method="POST">
             <div class="form-group">
                 <label for="namaJenisObat">Nama jenis obat</label>

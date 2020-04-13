@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title ?></title>
-    <?php $this->load->view('template/header'); ?>
-</head>
+<?php $data['title'] = $title; $this->load->view('template/header', $data); ?>
 <body>
     <?php $this->load->view('template/navbar', $jenis_obat) ?>
     <div class="container">
@@ -206,6 +199,7 @@
             </div>
         </div>
     </div>
+    <?php $this->load->view('template/footer'); ?>
     <?php $this->load->view('template/js'); ?>
 </body>
 </html>

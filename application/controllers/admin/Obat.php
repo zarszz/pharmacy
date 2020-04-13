@@ -14,7 +14,7 @@ class Obat extends CI_Controller {
 	{
 		if($this->is_has_privilege()){
 			$data['title'] = 'Admin - Tambah obat';
-			$data['jenis_obat'] = $this->Jenis_obat_model->get_all_data();
+			$data['jenis_obat'] = $this->Jenis_obat_model->get_jenis_obat();
 			$data['jenis_obat_complete'] = $this->Jenis_obat_model->get_jenis_data_complete();
 			$data['action'] = 'TAMBAH OBAT BARU';
 			$this->form_validation->set_rules('nama_obat', 'Nama obat', 'required|min_length[5]');
@@ -91,6 +91,7 @@ class Obat extends CI_Controller {
 				redirect(base_url() . 'index.php/admin/obat/index');
 			}
 		} else {
+			$this->output->set_status_header('404');
 			redirect('page_not_found');
 		}
 	}

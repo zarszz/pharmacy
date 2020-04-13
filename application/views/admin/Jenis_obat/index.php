@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php $this->load->view('template/header', $title); ?>
-</head>
+<?php $data['title'] = $title; $this->load->view('template/header', $data); ?>
 <body>
     <?php $this->load->view('template/navbar', $jenis_obat); ?>
     <div class="container">

@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title; ?></title>
-    <?php $this->load->view('template/header'); ?>
-</head>
+<?php $data['title'] = $title; $this->load->view('template/header', $data); ?>
 <body>
     <?php $this->load->view('template/navbar'); ?>
     <div class="container">
@@ -16,13 +9,21 @@
                 <center>
             </div>
             <div class="card-body">
-                <?php if($this->session->flashdata('flash')) :?>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        Create Account <strong>Sucessfully</strong>
-                        <?= $this->session->flashdata('flash'); ?>
+                <?php
+                    if(validation_errors()){
+                        echo '<div class="alert alert-danger alert-dismissible fade show">';
+                        echo validation_errors();
+                        echo '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
+                        echo '</div>';
+                    }
+                ?>
+            </div>
+                <?php if(isset($_SESSION['error'])) :?>
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <?php echo $_SESSION['error']; ?>
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
                     </div>
+                    <?php unset($_SESSION['error']); ?>
                 <?php endif; ?>
                 <form action="" method="post">
                     <div class="form-group">

@@ -29,7 +29,7 @@ class User extends CI_Controller {
         $data['title'] = 'Create Account';
         $data['jenis_obat'] = $this->Jenis_obat_model->get_jenis_obat();
         $this->form_validation->set_rules('nama','Nama','required');
-        $this->form_validation->set_rules('email','Email','required|valid_email|is_unique[user.email]');
+        $this->form_validation->set_rules('email','Email','required|valid_email|is_unique[user.email]',['is_unique' => 'This email is already used']);
         $this->form_validation->set_rules('password','Password','required');
         $this->form_validation->set_rules('alamat','Alamat', 'required|min_length[5]');
         if($this->form_validation->run() == FALSE){
