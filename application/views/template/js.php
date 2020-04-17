@@ -4,4 +4,5 @@
 <script type="text/javascript" src="<?php echo base_url('assets/DataTables/js/dataTables.bootstrap4.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/sweetalert2/dist/sweetalert2.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/chart.js/Chart.min.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/sb-admin.min.js'); ?>"></script>

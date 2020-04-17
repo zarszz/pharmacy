@@ -10,15 +10,44 @@
                         <article class="gallery-wrap">
                             <div class="img-big-wrap">
                                 <div>
-                                    <a href="#"><img src="http://placehold.it/450x450"></a>
+                                    <a href="#">
+                                        <?php if (isset($obat['foto_obat'])): ?>
+                                        <?php
+                                            $url = base_url() . 'assets/public/produk/' . $obat['foto_obat'];
+                                            $headers = get_headers($url);
+                                            if(stripos($headers[0], "200 OK")){
+                                                echo '<img class="card-img-top" src="'. $url .'" alt="">';
+                                            } else {
+                                                echo '<img class="card-img-top" src="http://placehold.it/700x400" alt="">';
+                                            }
+                                        ?>
+                                        <?php else: ?>
+                                            <img class="card-img-top" src="http://placehold.it/700x400" alt="">
+                                        <?php endif ?>
+                                    </a>
                                 </div>
                             </div>
                             <!-- slider-product.// -->
                             <div class="img-small-wrap">
-                                <div class="item-gallery"> <img src="http://placehold.it/450x450"> </div>
-                                <div class="item-gallery"> <img src="http://placehold.it/450x450"> </div>
-                                <div class="item-gallery"> <img src="http://placehold.it/450x450"> </div>
-                                <div class="item-gallery"> <img src="http://placehold.it/450x450"> </div>
+                                <?php if (isset($obat['foto_obat'])): ?>
+                                <?php
+                                    $url = base_url() . 'assets/public/produk/' . $obat['foto_obat'];
+                                    $headers = get_headers($url);
+                                    if(stripos($headers[0], "200 OK")){
+                                        echo '<div class="item-gallery"> <img src="'. $url .'"> </div>';
+                                        echo '<div class="item-gallery"> <img src="'. $url .'"> </div>';
+                                        echo '<div class="item-gallery"> <img src="'. $url .'"> </div>';
+                                    } else {
+                                        echo'<div class="item-gallery"> <img src="http://placehold.it/450x450"> </div>';
+                                        echo'<div class="item-gallery"> <img src="http://placehold.it/450x450"> </div>';
+                                        echo'<div class="item-gallery"> <img src="http://placehold.it/450x450"> </div>';
+                                    }
+                                ?>
+                                <?php else: ?>
+                                    <div class="item-gallery"> <img src="http://placehold.it/450x450"> </div>
+                                    <div class="item-gallery"> <img src="http://placehold.it/450x450"> </div>
+                                    <div class="item-gallery"> <img src="http://placehold.it/450x450"> </div>
+                                <?php endif ?>
                             </div>
                             <!-- slider-nav.// -->
                         </article>
@@ -36,9 +65,9 @@
                             </p>
                             <!-- price-detail-wrap .// -->
                             <dl class="item-property">
-                                <dt>Description</dt>
+                                <dt>Deskripsi</dt>
                                 <dd>
-                                    <p>Here goes description consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco </p>
+                                    <p><?php echo $obat['deskripsi']; ?></p>
                                 </dd>
                             </dl>
                             <dl class="param param-feature">
@@ -49,7 +78,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                 <dl class="param param-feature">
-                                <dt>Id Product</dt>
+                                <dt>Id Produk</dt>
                                 <dd><?php echo $obat['id_obat']; ?></dd>
                             </dl>
                                 </div>

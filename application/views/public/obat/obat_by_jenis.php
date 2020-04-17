@@ -44,7 +44,21 @@
                         <?php foreach($data_obat as $obat): ?>
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="card h-100">
-                                <a href="<?php echo base_url() . 'public/obat/show_obat/' . $obat['id_obat']; ?>"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                <a href="<?php echo base_url() . 'public/obat/show_obat/' . $obat['id_obat']; ?>">
+                                    <?php if (isset($obat['foto_obat'])): ?>
+                                    <?php
+                                        $url = base_url() . 'assets/public/produk/' . $obat['foto_obat'];
+                                        $headers = get_headers($url);
+                                        if(stripos($headers[0], "200 OK")){
+                                            echo '<img class="card-img-top" src="'. $url .'" alt="">';
+                                        } else {
+                                            echo '<img class="card-img-top" src="http://placehold.it/700x400" alt="">';
+                                        }
+                                    ?>
+                                    <?php else: ?>
+                                        <img class="card-img-top" src="http://placehold.it/700x400" alt="">
+                                    <?php endif ?>
+                                </a>
                                     <div class="card-body">
                                         <h4 class="card-title">
                                             <a href="<?php echo base_url() . 'public/obat/show_obat/' . $obat['id_obat']; ?>"><?php echo $obat['nama_obat']; ?></a>

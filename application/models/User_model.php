@@ -46,6 +46,14 @@ class User_model extends CI_Model {
         return $this->db->count_all($this->_table);
     }
 
+    public function count_by_kelamin()
+    {
+        $this->db->select("COUNT(*) AS count_data, jenis_kelamin");
+        $this->db->from($this->_table);
+        $this->db->group_by('jenis_kelamin');
+        return $this->db->get()->result_array();
+    }
+
     public function update($id_user)
     {
         $data = [

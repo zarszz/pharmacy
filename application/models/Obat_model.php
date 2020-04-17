@@ -49,11 +49,21 @@ class Obat_model extends CI_Model
         return $this->db->count_all($this->_table);
     }
 
+    public function count_by_jenis()
+    {
+        $this->db->select('COUNT(*) as count_data, obat.id_jenis, jenis_obat');
+        $this->db->from('obat');
+        $this->db->join('jenis_obat', 'jenis_obat.id_jenis = obat.id_jenis');
+        $this->db->group_by('obat.id_jenis');
+        return $this->db->get()->result_array();
+    }
+
     public function count_by_id_jenis($id_jenis){
         $this->db->from($this->_table);
         $this->db->where('id_jenis', $id_jenis);
         return $this->db->count_all_results();
     }
+
     public function update($id)
     {
         $data = [
