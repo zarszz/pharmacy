@@ -110,7 +110,7 @@
                     { "data": "email"},
                     {
                         "render": function(data, type, row){
-                            update_link = `http://localhost/tugas-besar-pemrograman-web/index.php/public/user/edit_with_admin/${row.id_user}`
+                            update_link = `<?php echo base_url('public/user/edit_with_admin/')?>${row.id_user}`
                             html = `<a href = ${update_link} class="btn btn-primary btn-sm">EDIT</a> | `;
                             html += `<button type="submit" class="btn btn-danger btn-sm" id="remove" value=${row.id_user}>DELETE</input>`;
                             return html;
@@ -136,7 +136,7 @@
             }).then((result) => {
                 if(result.value){
                     $.ajax({
-                        url: 'http://localhost/tugas-besar-pemrograman-web/index.php/public/user/delete_ajax/' + id,
+                        url: "<?php echo base_url('/public/user/delete_ajax/'); ?>" + id,
                         type: "GET",
                         success: function (){
                             table.ajax.reload();

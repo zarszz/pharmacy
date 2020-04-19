@@ -121,7 +121,7 @@
                     },
                     {
                         "render": function(data, type, row){
-                            update_link = `http://localhost/tugas-besar-pemrograman-web/index.php/admin/obat/edit/${row.id_obat}`
+                            update_link = `<?php echo base_url('admin/obat/edit/') ?>${row.id_obat}`
                             html = `<a href = ${update_link} class="btn btn-primary btn-sm">EDIT</a> | `;
                             html += `<button type="submit" class="btn btn-danger btn-sm" id="remove" value=${row.id_obat}>DELETE</input>`;
                             return html;
@@ -147,7 +147,7 @@
             }).then((result) => {
                 if(result.value){
                     $.ajax({
-                        url: 'http://localhost/tugas-besar-pemrograman-web/index.php/admin/obat/delete_ajax/' + id,
+                        url: `<?php echo base_url('admin/obat/delete_ajax/') ?>${id}`,
                         type: "GET",
                         success: function (){
                             table.ajax.reload();

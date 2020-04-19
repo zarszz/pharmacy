@@ -188,7 +188,7 @@
 
         function ajaxCardData(){
           $.ajax({
-            url: "http://localhost/tugas-besar-pemrograman-web/admin/Admin_dashboard/ajax_card_data",
+            url: "<?php echo base_url('admin/Admin_dashboard/ajax_card_data') ?>",
             method: "GET",
             success: function(data){
               $('#card-jenis-obat > p').text(`${data.count_jenis_obat} Jenis Obat Tersedia`);
@@ -200,8 +200,8 @@
             }
           })
         }
-        loadChart('chart-sebaran-obat', "http://localhost/tugas-besar-pemrograman-web/admin/Admin_dashboard/ajax_chart_obat");
-        loadChart('chart-sebaran-user-kelamin', "http://localhost/tugas-besar-pemrograman-web/admin/Admin_dashboard/ajax_chart_user");
+        loadChart('chart-sebaran-obat', "<?php echo base_url('admin/Admin_dashboard/ajax_chart_obat'); ?>");
+        loadChart('chart-sebaran-user-kelamin', "<?php echo base_url('admin/Admin_dashboard/ajax_chart_user'); ?>");
         ajaxCardData();
       })
     </script>
