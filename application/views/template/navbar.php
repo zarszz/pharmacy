@@ -30,7 +30,7 @@
           <?php endif ?>
           <?php if(isset($_SESSION['logged_in'])): ?>
             <?php if($_SESSION['role'] == 'admin' or $_SESSION['role'] == 'pegawai'): ?>
-              <li class="nav-item dropdown">
+              <!-- <li class="nav-item dropdown">
                 <button class="nav-link dropdown-toggle btn btn-outline-primary my-2 my-sm-0" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   MANAGE
                 </button>
@@ -41,10 +41,11 @@
                       <a class="dropdown-item" href="<?php echo base_url() . 'index.php/public/user/manage_user'; ?>">MANAGE DATA USER</a>
                     <?php endif ?>
                 </div>
-              </li>
+              </li> -->
+              <li><a class="btn btn-outline-primary " href="<?php echo base_url('/admin'); ?>">ADMIN</a></li>
             <?php endif ?>
             <li class="nav-item white">
-              <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url('index.php/public/user/profile_page'); ?>">Your Profile</a>
+              <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url('index.php/public/user/profile_page'); ?>">Profile</a>
             </li>
             <li class="nav-item white">
               <a class="btn btn-outline-danger my-2 my-sm-0" href="<?php echo base_url('index.php/public/login/logout'); ?>">Logout</a>

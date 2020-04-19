@@ -36,11 +36,15 @@
                     <small id="emailHelp" class="form-text text-danger"> <?= form_error('nama') ?>   </small>
                 </div>
                 <div class="form-group">
-                    <label for="nama">Jenis Kelamin</label>
-                    <select id="jenis_kelamin" class="form-control" name="jenis_kelamin">
-                        <option value="L">Laki-laki</option>
-                        <option value="P">Perempuan</option>
-                    </select>
+                    <label for="nama">Jenis kelamin</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="priaForm" name="jenis_kelamin" value="L">
+                        <label for="priaForm" class="form-check-label">Pria</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="wanitaForm" name="jenis_kelamin" value="P">
+                        <label for="priaForm" class="form-check-label">Wanita</label>
+                    </div>
                     <small id="emailHelp" class="form-text text-danger"> <?= form_error('jenis_kelamin') ?>   </small>
                 </div>
                 <div class="form-group">

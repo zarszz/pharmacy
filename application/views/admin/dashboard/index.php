@@ -43,10 +43,10 @@
           <!-- Icon Cards-->
           <div class="row">
             <div class="col-xl-4 col-sm-6 mb-3">
-              <div class="card text-white bg-primary o-hidden h-100">
+              <div class="card text-white bg-danger o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
-                    <i class="fas fa-fw fa-comments"></i>
+                    <i class="fas fa-fw fa-list-alt"></i>
                   </div>
                   <div class="mr-5" id="card-jenis-obat"><p></p></div>
                 </div>
@@ -59,10 +59,10 @@
               </div>
             </div>
             <div class="col-xl-4 col-sm-6 mb-3">
-              <div class="card text-white bg-warning o-hidden h-100">
+              <div class="card text-white bg-info o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
-                    <i class="fas fa-fw fa-list"></i>
+                    <i class="fas fa-fw fa-tablets"></i>
                   </div>
                   <div class="mr-5" id="card-obat"><p></p></div>
                 </div>
@@ -78,7 +78,7 @@
               <div class="card text-white bg-success o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <i class="fas fa-fw fa-user"></i>
                   </div>
                   <div class="mr-5" id="card-user"><p></p></div>
                 </div>
@@ -101,7 +101,6 @@
                 <div class="card-body">
                   <canvas id="chart-sebaran-obat" width="100%" height="100"></canvas>
                 </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
               </div>
             </div>
             <div class="col-lg-6">
@@ -113,7 +112,6 @@
                 <div class="card-body">
                   <canvas id="chart-sebaran-user-kelamin" width="100%" height="100"></canvas>
                 </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
               </div>
             </div>
           </div>
@@ -125,7 +123,7 @@
         <footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2018</span>
+              <span>Copyright © @POTIK</span>
             </div>
           </div>
         </footer>
@@ -146,11 +144,9 @@
     <script>
       $(document).ready(function() {
         function loadChart(elementId, ajaxUrl){
-          // Set new default font family and font color to mimic Bootstrap's default styling
           Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
           Chart.defaults.global.defaultFontColor = '#292b2c';
 
-          // Pie Chart Example
           var ctx = document.getElementById(elementId);
           $.ajax({
             url: ajaxUrl,
@@ -195,7 +191,7 @@
             url: "http://localhost/tugas-besar-pemrograman-web/admin/Admin_dashboard/ajax_card_data",
             method: "GET",
             success: function(data){
-              $('#card-jenis-obat > p').text(`${data.count_jenis_obat} Obat Jenis Tersedia`);
+              $('#card-jenis-obat > p').text(`${data.count_jenis_obat} Jenis Obat Tersedia`);
               $('#card-obat > p').text(`${data.count_obat} Obat Tersedia`);
               $('#card-user > p').text(`${data.count_user} User Terdaftar`);
             },

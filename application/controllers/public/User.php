@@ -43,7 +43,61 @@ class User extends CI_Controller {
 
     public function edit()
     {
-        // edit user page
+        if($this->is_logged_in()){
+            $data['title'] = 'Update Akun';
+            $data['jenis_obat'] = $this->Jenis_obat_model->get_jenis_obat();
+            $data['user_data'] = $this->User_model->get_user_by_id($_SESSION['user_id'])[0];
+            $this->form_validation->set_rules('nama','Nama','required');
+            $this->form_validation->set_rules('email','Email','required|valid_email');
+            $this->form_validation->set_rules('alamat','Alamat', 'required|min_length[5]');
+            if($this->form_validation->run() == FALSE){
+                $this->load->view('public/user/edit', $data);
+            } else {
+                $this->User_model->update($_SESSION['user_id']);
+                $_SESSION['UPDATE_SUCCESS'] = 'UPDATE BERHASIL';
+                redirect('public/User/edit');
+            }
+        } else {
+            redirect('page_not_found');
+        }
+    }
+
+    public function edit_password()
+    {
+        if($this->is_logged_in()){
+            $data['title'] = 'Edit Password';
+            $data['jenis_obat'] = $this->Jenis_obat_model->get_jenis_obat();
+            $this->form_validation->set_rules('old-password','Password','required|min_length[5]');
+            $this->form_validation->set_rules('new-password','Password','required|min_length[5]');
+            $this->form_validation->set_rules('confirm-new-password','Password','required|min_length[5]');
+            if($this->form_validation->run() == FALSE){
+                $this->load->view('public/user/change_password', $data);
+            } else {
+                $user_data = $this->User_model->get_user_by_id($_SESSION['user_id'])[0];
+                $old_password_form = $this->input->post('old-password', true);
+                $new_password = $this->input->post('new-password', true);
+                $new_password_confirm = $this->input->post('confirm-new-password', true);
+                if($user_data['password'] == $old_password_form){
+                    if($new_password == $new_password_confirm) {
+                        if($this->User_model->update_password($_SESSION['user_id'], $new_password)){
+                            $_SESSION['UPDATE_SUCCESS'] = "Ganti password berhasil";
+                        } else {
+                            $_SESSION['PASS_ERROR'] = 'Terjadi kesalahan...';
+                        }
+                    } else {
+                        $_SESSION['PASS_ERROR'] = 'Password baru tidak sama';
+                    }
+                } else {
+                    $_SESSION['PASS_ERROR'] = 'Password tidak sama';
+                    redirect('public/user/edit_password');
+                }
+                $this->User_model->create_account();
+                $this->session->set_flashdata('flash','created');
+                redirect('welcome');
+            }
+        } else {
+            redirect('page_not_found');
+        }
     }
 
     public function manage_user()
@@ -65,6 +119,8 @@ class User extends CI_Controller {
             $user_data = $this->User_model->get_user_by_id($id_user)[0];
             $data['email'] = $user_data['email'];
             $data['nama'] = $user_data['nama'];
+            $data['jenis_kelamin'] = $user_data['jenis_kelamin'];
+            $data['alamat'] = $user_data['alamat'];
 
             $data['jenis_obat'] = $this->Jenis_obat_model->get_jenis_obat();
 
@@ -157,5 +213,10 @@ class User extends CI_Controller {
     private function is_has_privilege()
     {
         return $_SESSION['role'] == 'admin';
+    }
+
+    public function is_logged_in()
+    {
+        return isset($_SESSION['user_id']);
     }
 }

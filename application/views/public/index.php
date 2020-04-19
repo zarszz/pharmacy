@@ -22,13 +22,13 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+                            <img class="d-block img-fluid" src="<?php echo base_url('assets/public/slider/medi-call-banner.jpg');?>">
                         </div>
                         <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+                            <img class="d-block img-fluid" src="<?php echo base_url('assets/public/slider/banner-mask-update.jpg');?>">
                         </div>
                         <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+                            <img class="d-block img-fluid" src="<?php echo base_url('assets/public/slider/suplement-banner.jpg');?>">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -41,21 +41,6 @@
                     </a>
                 </div>
                 <div class="row">
-                    <!-- <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                            <a href="#">Item One</a>
-                            </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        </div>
-                        </div>
-                    </div> -->
                     <?php foreach($data_obat as $obat): ?>
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100">
@@ -79,11 +64,8 @@
                                         <a href="<?php echo base_url() . 'public/obat/show_obat/' . $obat['id_obat']; ?>"><?php echo $obat['nama_obat']; ?></a>
                                     </h4>
                                     <h5>Rp.<?php echo number_format($obat['harga']); ?></h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                                </div>
-                                <div class="card-footer">
-                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                                </div>
+                                    <p class="card-text"><?php echo substr($obat['deskripsi'], 0, 82); ?></p>
+                                </div>3
                             </div>
                         </div>
                     <?php endforeach ?>

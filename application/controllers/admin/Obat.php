@@ -17,6 +17,7 @@ class Obat extends CI_Controller {
 			$data['jenis_obat'] = $this->Jenis_obat_model->get_jenis_obat();
 			$data['jenis_obat_complete'] = $this->Jenis_obat_model->get_jenis_data_complete();
 			$data['action'] = 'TAMBAH OBAT BARU';
+			$config = $this->get_upload_config();
 			$this->form_validation->set_rules('nama_obat', 'Nama obat', 'required|min_length[5]');
 			$this->form_validation->set_rules('id_jenis', 'Jenis obat', 'required');
 			$this->form_validation->set_rules('harga', 'Harga obat', 'required|numeric');
@@ -25,9 +26,18 @@ class Obat extends CI_Controller {
 				$this->load->view('admin/obat/form', $data);
 				$this->session->set_flashdata('flash');
 			} else {
-				$this->Obat_model->insert_new($this->input->post('id_jenis', true));
-				$this->session->set_flashdata('flash', 'Berhasil ditambahkan');
-				redirect(base_url() . 'index.php/admin/obat/index');
+				$file_name = $this->slugify($this->input->post('nama_obat', true));
+				$extension = pathinfo($_FILES['foto-obat']['name'], PATHINFO_EXTENSION);
+				$config['file_name'] = $file_name . '.' . $extension;
+				$this->load->library('upload', $config);
+				if(!$this->upload->do_upload('foto-obat')){
+					$_SESSION['UPLOAD_ERROR'] = "Upload gagal";
+					redirect(base_url('admin/obat/create'));
+				} else {
+					$this->Obat_model->insert_new($this->input->post('id_jenis', true), $config['file_name']);
+					$_SESSION['ADD_SUCCESS'] = "Add data success";
+					redirect(base_url() . 'admin/obat/create');
+				}
 			}
 		} else {
 			redirect('page_not_found');
@@ -73,11 +83,13 @@ class Obat extends CI_Controller {
 			$data['jenis_obat'] = $this->Jenis_obat_model->get_jenis_obat();
 			$data['jenis_obat_complete'] = $this->Jenis_obat_model->get_jenis_data_complete();
 			$data['action'] = 'UPDATE OBAT';
+			$config = $this->get_upload_config();
 			$obat_by_id = $this->Obat_model->get_obat_by_id($id);
 			$data['nama_obat'] = $obat_by_id['nama_obat'];
 			$data['id_jenis'] = $obat_by_id['id_jenis'];
 			$data['harga'] = $obat_by_id['harga'];
 			$data['stok'] = $obat_by_id['stok'];
+			$data['deskripsi'] = $obat_by_id['deskripsi'];
 			$this->form_validation->set_rules('nama_obat', 'Nama obat', 'required|min_length[5]');
 			$this->form_validation->set_rules('id_jenis', 'Jenis obat', 'required');
 			$this->form_validation->set_rules('harga', 'Harga obat', 'required|numeric');
@@ -86,9 +98,19 @@ class Obat extends CI_Controller {
 				$this->load->view('admin/obat/form', $data);
 				$this->session->set_flashdata('flash');
 			} else {
-				$this->Obat_model->update($id);
-				$this->session->set_flashdata('flash', 'Berhasil diupdate');
-				redirect(base_url() . 'index.php/admin/obat/index');
+				$file_name = $this->slugify($this->input->post('nama_obat', true));
+				$extension = pathinfo($_FILES['foto-obat']['name'], PATHINFO_EXTENSION);
+				$config['file_name'] = $file_name . '.' . $extension;
+				$config['overwrite'] = true;
+				$this->load->library('upload', $config);
+				if(!$this->upload->do_upload('foto-obat')){
+					$_SESSION['UPLOAD_ERROR'] = "Upload gagal";
+					redirect(base_url('admin/obat/edit/' . $id));
+				} else {
+					$this->Obat_model->update($id);
+					$_SESSION['SUCCESS'] = "Update data success";
+					redirect(base_url() . 'admin/obat/edit/' . $id);
+				}
 			}
 		} else {
 			$this->output->set_status_header('404');
@@ -122,6 +144,22 @@ class Obat extends CI_Controller {
 		}
 
 	}
+
+	private function get_upload_config()
+	{
+		return [
+			"upload_path" => "./assets/public/produk",
+			"allowed_types" => "jpg|png",
+			"max_size" => "500",
+			"max_width" => "1024",
+			"max_height" => "768"
+		];
+	}
+
+	private function slugify($string){
+		$slug=preg_replace('/[^A-Za-z0-9-]+/', '-', $string);
+		return $slug;
+	 }
 
 	private function is_has_privilege()
 	{

@@ -40,11 +40,39 @@
                 <?php endif ?>
             </div>
             <div class="form-group">
-                <label for="nama">Jenis Kelamin</label>
-                <select id="jenis_kelamin" class="form-control" name="jenis_kelamin">
-                    <option value="L">Laki-laki</option>
-                    <option value="P">Perempuan</option>
-                </select>
+                <label>Jenis Kelamin</label>
+                <?php if ($action == "TAMBAH USER BARU"): ?>
+                    <label for="nama">Jenis kelamin</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="priaForm" name="jenis_kelamin" value="L">
+                        <label for="priaForm" class="form-check-label">Pria</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="wanitaForm" name="jenis_kelamin" value="P">
+                        <label for="priaForm" class="form-check-label">Wanita</label>
+                    </div>
+                <?php else: ?>
+                    <div class="form-check">
+                        <?php if ($jenis_kelamin == 'L'): ?>
+                            <input type="radio" class="form-check-input" id="priaForm"name="jenis_kelamin" value="L" checked>
+                        <?php else: ?>
+                            <input type="radio" class="form-check-input" id="priaForm"name="jenis_kelamin" value="L">
+                        <?php endif ?>
+                        <label for="priaForm" class="form-check-label">
+                            Pria
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <?php if ($jenis_kelamin == 'P'): ?>
+                            <input type="radio" class="form-check-input" id="wanitaForm"name="jenis_kelamin" value="P" checked>
+                        <?php else: ?>
+                            <input type="radio" class="form-check-input" id="priaForm"name="jenis_kelamin" value="P">
+                        <?php endif ?>
+                        <label for="priaForm" class="form-check-label">
+                            Wanita
+                        </label>
+                    </div>
+                <?php endif ?>
                 <small id="emailHelp" class="form-text text-danger"> <?= form_error('jenis_kelamin') ?>   </small>
             </div>
             <?php if ($action == 'TAMBAH USER BARU') : ?>

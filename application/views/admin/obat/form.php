@@ -10,8 +10,22 @@
                 echo '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
                 echo '</div>';
             }
+            if(isset($_SESSION['UPLOAD_ERROR'])){
+                echo '<div class="alert alert-danger alert-dismissible fade show col-md-3 text-center">';
+                echo $_SESSION['UPLOAD_ERROR'];
+                echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                echo '</div>';
+                unset($_SESSION['UPLOAD_ERROR']);
+            }
+            if(isset($_SESSION['SUCCESS'])){
+                echo '<div class="alert alert-success alert-dismissible fade show col-md-3 text-center">';
+                echo $_SESSION['SUCCESS'];
+                echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                echo '</div>';
+                unset($_SESSION['SUCCESS']);
+            }
         ?>
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="namaObat">Nama obat</label>
                 <?php if ($action == 'TAMBAH OBAT BARU') : ?>
@@ -29,6 +43,23 @@
                     <?php endforeach ?>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="inputDeskripsi">Deskripsi Obat</label>
+                <?php if ($action == 'TAMBAH OBAT BARU') : ?>
+                    <textarea class="form-control" name="deskripsi" id="inputDeskripsi" rows="5"></textarea>
+                <?php else : ?>
+                    <textarea class="form-control" name="deskripsi" id="inputDeskripsi" rows="5"><?php echo $deskripsi; ?></textarea>
+                <?php endif ?>
+            </div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Foto obat</span>
+				</div>
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" id="inputFotoObat" name="foto-obat" accept='image/*' required>
+					<label class="custom-file-label text-left" for="inputFotoObat">Choose file</label>
+				</div>
+			</div>
             <div class="form-group">
                 <label for="hargaObat">Harga</label>
                 <?php if ($action == 'TAMBAH OBAT BARU') : ?>

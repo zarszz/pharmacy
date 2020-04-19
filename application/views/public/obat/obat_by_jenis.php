@@ -64,10 +64,7 @@
                                             <a href="<?php echo base_url() . 'public/obat/show_obat/' . $obat['id_obat']; ?>"><?php echo $obat['nama_obat']; ?></a>
                                         </h4>
                                         <h5>Rp.<?php echo number_format($obat['harga']); ?></h5>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                        <p class="card-text"><?php echo substr($obat['deskripsi'], 0, 82); ?></p>
                                     </div>
                                 </div>
                             </div>

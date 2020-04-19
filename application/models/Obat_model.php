@@ -5,7 +5,7 @@ class Obat_model extends CI_Model
 {
     private $_table = 'obat';
 
-    public function insert_new($id_jenis)
+    public function insert_new($id_jenis, $foto_obat)
     {
         $id_obat = $this->generate_id_obat($id_jenis);
         $data = [
@@ -13,7 +13,9 @@ class Obat_model extends CI_Model
             "id_jenis" => $id_jenis,
             "id_obat" => $id_obat,
             "harga" => $this->input->post('harga', true),
-            "stok" => $this->input->post('stok', true)
+            "stok" => $this->input->post('stok', true),
+            "deskripsi" => $this->input->post('deskripsi', true),
+            "foto_obat" => $foto_obat
         ];
         $this->db->insert($this->_table, $data);
     }
@@ -70,6 +72,7 @@ class Obat_model extends CI_Model
             "nama_obat" => $this->input->post('nama_obat', true),
             "harga" => $this->input->post('harga', true),
             "stok" => $this->input->post('stok', true),
+            "deskripsi" => $this->input->post('deskripsi', true)
         ];
         $this->db->where('id_obat', $id);
         $this->db->update($this->_table, $data);

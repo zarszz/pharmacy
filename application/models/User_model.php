@@ -59,11 +59,20 @@ class User_model extends CI_Model {
         $data = [
             "email" => $this->input->post('email', true),
             "nama" => $this->input->post('nama', true),
+            "alamat" => $this->input->post('alamat', true),
+            "jenis_kelamin" => $this->input->post('jenis_kelamin', true)
+
         ];
         $this->db->where('id_user', $id_user);
         $this->db->update($this->_table, $data);
     }
 
+    public function update_password($id_user, $new_password)
+    {
+        $this->db->set('password', $new_password);
+        $this->db->where('id_user', $id_user);
+        return $this->db->update($this->_table);
+    }
 
     public function delete($id_user)
     {
