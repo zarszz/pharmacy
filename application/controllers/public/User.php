@@ -36,8 +36,8 @@ class User extends CI_Controller {
             $this->load->view('public/user/form', $data);
         } else {
             $this->User_model->create_account();
-            $this->session->set_flashdata('flash','created');
-            redirect('welcome');
+            $_SESSION['REGISTER_SUCCESS'] = "Registrasi berhasil";
+            redirect('public/user/create_account');
         }
     }
 
@@ -121,6 +121,7 @@ class User extends CI_Controller {
             $data['nama'] = $user_data['nama'];
             $data['jenis_kelamin'] = $user_data['jenis_kelamin'];
             $data['alamat'] = $user_data['alamat'];
+            $data['saldo'] = $user_data['saldo'];
 
             $data['jenis_obat'] = $this->Jenis_obat_model->get_jenis_obat();
 
@@ -134,7 +135,7 @@ class User extends CI_Controller {
             } else {
                 $this->User_model->update($id_user);
                 $this->session->set_flashdata('flash','updated successfully !!');
-                redirect('public/user/manage_user');
+                redirect('admin/Admin_dashboard/user_dashboard');
             }
         } else {
             redirect('page_not_found');

@@ -1,11 +1,11 @@
 <?php $data['title'] = $title; $this->load->view('template/header', $data); ?>
 <body>
     <?php $this->load->view('template/navbar'); ?>
-    <div class="container">
+    <div class="container" style="margin-top: 5%;">
         <div class="card text-white bg-dark col-md-6 mx-auto">
             <div class="card-header">
                 <center>
-                @potik Login
+                @POTIK Login
                 <center>
             </div>
             <div class="card-body">
@@ -44,5 +44,6 @@
     </div>
     <?php $this->load->view('template/js'); ?>
 </body>
+<?php $this->load->view('template/footer'); ?>
 </html>
 

@@ -9,16 +9,22 @@
               Kategori
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <?php $jenis_obat = $this->load->Jenis_obat_model->get_jenis_obat(); ?>
               <?php foreach ($jenis_obat as $data): ?>
-                <a class="dropdown-item" href="#"><?php echo $data['jenis_obat']; ?></a>
+                <a class="dropdown-item" href="<?php echo base_url('public/obat/show_obat_by_jenis/') . $data['id_jenis']; ?>">
+                  <?php echo $data['jenis_obat']; ?>
+                </a>
               <?php endforeach ?>
             </div>
+          </li>
+          <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url('public/obat/search'); ?>">Search</a>
           </li>
       </ul>
   </div>
   <div class="mx-auto order-0">
-      <form class="form-inline">
-        <input class="form-control mr-sm-6" type="search" placeholder="Search" aria-label="Search">
+      <form class="form-inline" method="GET" action="<?php echo base_url() . 'public/obat/search' ?>">
+        <input class="typeahead form-control " type="text" placeholder="Search" aria-label="Search" name="query">
       </form>
   </div>
   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -30,22 +36,17 @@
           <?php endif ?>
           <?php if(isset($_SESSION['logged_in'])): ?>
             <?php if($_SESSION['role'] == 'admin' or $_SESSION['role'] == 'pegawai'): ?>
-              <!-- <li class="nav-item dropdown">
-                <button class="nav-link dropdown-toggle btn btn-outline-primary my-2 my-sm-0" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  MANAGE
-                </button>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<?php echo base_url() . 'index.php/admin/obat/index'; ?>">MANAGE DATA OBAT</a>
-                    <a class="dropdown-item" href="<?php echo base_url() . 'index.php/admin/jenis_obat/index'; ?>">MANAGE DATA JENIS OBAT</a>
-                    <?php if ($_SESSION['role'] == 'admin') : ?>
-                      <a class="dropdown-item" href="<?php echo base_url() . 'index.php/public/user/manage_user'; ?>">MANAGE DATA USER</a>
-                    <?php endif ?>
-                </div>
-              </li> -->
               <li><a class="btn btn-outline-primary " href="<?php echo base_url('/admin'); ?>">ADMIN</a></li>
             <?php endif ?>
-            <li class="nav-item white">
-              <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url('index.php/public/user/profile_page'); ?>">Profile</a>
+            <li class="nav-item dropdown">
+              <!-- <a class="btn btn-outline-success my-2 my-sm-0" href="<?php echo base_url('index.php/public/user/profile_page'); ?>">Profile</a> -->
+              <button class="nav-link dropdown-toggle btn btn-outline-success" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Akun
+              </button>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="<?php echo base_url('index.php/public/user/profile_page'); ?>"><i class="fa fa-user"></i> Your Profile</a>
+                <a class="dropdown-item" href="<?php echo base_url() . 'index.php/public/Obat/show_cart'; ?>"><i class="fa fa-shopping-cart"></i> Your Cart</a>
+              </div>
             </li>
             <li class="nav-item white">
               <a class="btn btn-outline-danger my-2 my-sm-0" href="<?php echo base_url('index.php/public/login/logout'); ?>">Logout</a>

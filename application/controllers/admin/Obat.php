@@ -8,6 +8,7 @@ class Obat extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Obat_model');
 		$this->load->model('Jenis_obat_model');
+		$this->load->model('Cart_model');
 	}
 
 	public function create()
@@ -84,12 +85,7 @@ class Obat extends CI_Controller {
 			$data['jenis_obat_complete'] = $this->Jenis_obat_model->get_jenis_data_complete();
 			$data['action'] = 'UPDATE OBAT';
 			$config = $this->get_upload_config();
-			$obat_by_id = $this->Obat_model->get_obat_by_id($id);
-			$data['nama_obat'] = $obat_by_id['nama_obat'];
-			$data['id_jenis'] = $obat_by_id['id_jenis'];
-			$data['harga'] = $obat_by_id['harga'];
-			$data['stok'] = $obat_by_id['stok'];
-			$data['deskripsi'] = $obat_by_id['deskripsi'];
+			$data['obat'] = $this->Obat_model->get_obat_by_id($id);
 			$this->form_validation->set_rules('nama_obat', 'Nama obat', 'required|min_length[5]');
 			$this->form_validation->set_rules('id_jenis', 'Jenis obat', 'required');
 			$this->form_validation->set_rules('harga', 'Harga obat', 'required|numeric');
@@ -142,6 +138,30 @@ class Obat extends CI_Controller {
 			header('Content-Type: application/json');
 			echo json_encode(['error' => 'not found']);
 		}
+
+	}
+
+	public function ajax_cart()
+	{
+		if($this->is_has_privilege()) {
+			$data_total = $this->Cart_model->count_all_data();
+			$data = $this->Cart_model->get_all_cart();
+
+			$callback = array(
+				'recordsTotal' => $data_total,
+				'data' => $data
+			);
+            header('Content-Type: application/json');
+            echo json_encode($callback);
+        } else {
+			$this->output->set_status_header('404');
+			header('Content-Type: application/json');
+			echo json_encode(['error' => 'not found']);
+		}
+	}
+
+	public function delete_cart_ajax($id)
+	{
 
 	}
 

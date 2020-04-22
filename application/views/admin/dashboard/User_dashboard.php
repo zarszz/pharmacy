@@ -27,6 +27,11 @@
             <i class="fas fa-fw fa-user"></i>
             <span>Manage User</span></a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url('admin/Admin_dashboard/cart_dashboard'); ?>">
+            <i class="fas fa-fw fa-shopping-cart"></i>
+            <span>Manage Cart</span></a>
+        </li>
       </ul>
 
       <div id="content-wrapper">
@@ -55,6 +60,7 @@
                           <th>ID USER</th>
                           <th>NAMA</th>
                           <th>EMAIL</th>
+                          <th>SALDO</th>
                           <th>ACTION</th>
                       </tr>
                   </thead>
@@ -63,6 +69,7 @@
                           <th>ID USER</th>
                           <th>NAMA</th>
                           <th>EMAIL</th>
+                          <th>SALDO</th>
                           <th>ACTION</th>
                       </tr>
                   </tfoot>
@@ -70,7 +77,6 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
 
         </div>
@@ -80,7 +86,7 @@
         <footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2018</span>
+              <span>Copyright © @POTIK</span>
             </div>
           </div>
         </footer>
@@ -108,6 +114,7 @@
                     { "data": "id_user"},
                     { "data": "nama"},
                     { "data": "email"},
+                    { "data": "saldo"},
                     {
                         "render": function(data, type, row){
                             update_link = `<?php echo base_url('public/user/edit_with_admin/')?>${row.id_user}`

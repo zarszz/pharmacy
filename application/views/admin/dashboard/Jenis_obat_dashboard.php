@@ -27,6 +27,11 @@
             <i class="fas fa-fw fa-user"></i>
             <span>Manage User</span></a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url('admin/Admin_dashboard/cart_dashboard'); ?>">
+            <i class="fas fa-fw fa-shopping-cart"></i>
+            <span>Manage Cart</span></a>
+        </li>
       </ul>
 
       <div id="content-wrapper">
@@ -70,7 +75,6 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
           </div>
         </div>
         <!-- /.container-fluid -->
@@ -79,7 +83,7 @@
         <footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2018</span>
+              <span>Copyright © @POTIK</span>
             </div>
           </div>
         </footer>

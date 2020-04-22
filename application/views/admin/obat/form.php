@@ -1,7 +1,7 @@
 <?php $data['title'] = $title; $this->load->view('template/header', $data); ?>
 <body>
-    <?php $this->load->view('template/navbar', $jenis_obat); ?>
-    <div class="container">
+    <?php $this->load->view('template/navbar'); ?>
+    <div class="container" style="margin-top: 3%">
         <h1 class="text-center"><?php echo $action ?></h1>
         <?php
             if(validation_errors()){
@@ -32,7 +32,7 @@
                     <input type="text" class="form-control" id="namaObat" placeholder="Masukkan nama obat" name="nama_obat">
                 <?php else : ?>
                     <input type="text" class="form-control" id="namaObat" placeholder="Masukkan nama obat"
-                     name="nama_obat" value="<?php echo $nama_obat; ?>">
+                     name="nama_obat" value="<?php echo $obat['nama_obat']; ?>">
                 <?php endif ?>
             </div>
             <div class="form-group">
@@ -48,9 +48,27 @@
                 <?php if ($action == 'TAMBAH OBAT BARU') : ?>
                     <textarea class="form-control" name="deskripsi" id="inputDeskripsi" rows="5"></textarea>
                 <?php else : ?>
-                    <textarea class="form-control" name="deskripsi" id="inputDeskripsi" rows="5"><?php echo $deskripsi; ?></textarea>
+                    <textarea class="form-control" name="deskripsi" id="inputDeskripsi" rows="5"><?php echo $obat['deskripsi']; ?></textarea>
                 <?php endif ?>
             </div>
+            <?php if ($action == 'UPDATE OBAT'): ?>
+                <div class="form-group">
+                    <label for="currentFotoObat">Foto obat saat ini</label>
+                    <?php if (isset($obat['foto_obat'])): ?>
+                    <?php
+                        $url = base_url() . 'assets/public/produk/' . $obat['foto_obat'];
+                        $headers = get_headers($url);
+                        if(stripos($headers[0], "200 OK")){
+                            echo '<img src="'. $url .'" alt="" width="200" heigth="200">';
+                        } else {
+                            echo 'belum memiliki foto ...';
+                        }
+                    ?>
+                    <?php else:
+                        echo 'belum memiliki foto ...'; ?>
+                    <?php endif ?>
+                </div>
+            <?php endif ?>
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text">Foto obat</span>
@@ -66,7 +84,7 @@
                     <input type="number" class="form-control" id="hargaObat" placeholder="Masukkan harga obat" name="harga">
                 <?php else : ?>
                     <input type="number" class="form-control" id="hargaObat" placeholder="Masukkan harga obat" name="harga"
-                     value="<?php echo $harga; ?>">
+                     value="<?php echo $obat['harga']; ?>">
                 <?php endif ?>
             </div>
             <div class="form-group">
@@ -75,7 +93,7 @@
                     <input type="number" class="form-control" id="stokObat" placeholder="Masukkan stok obat" name="stok">
                 <?php else: ?>
                     <input type="number" class="form-control" id="stokObat" placeholder="Masukkan stok obat" name="stok"
-                     value="<?php echo $stok; ?>">
+                     value="<?php echo $obat['stok']; ?>">
                 <?php endif ?>
             </div>
             <?php if ($action == 'TAMBAH OBAT BARU'): ?>

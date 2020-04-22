@@ -1,6 +1,6 @@
 <?php $data['title'] = $title; $this->load->view('template/header', $data); ?>
 <body>
-    <?php $this->load->view('template/navbar', $jenis_obat); ?>
+    <?php $this->load->view('template/navbar'); ?>
     <div class="container">
         <h1 class="text-center"><?php echo $action ?></h1>
         <?php

@@ -1,6 +1,6 @@
 <?php $data['title'] = $title; $this->load->view('template/header', $data); ?>
 <body>
-    <?php $this->load->view('template/navbar', $jenis_obat) ?>
+    <?php $this->load->view('template/navbar') ?>
     <div class="container" style="margin-top: 5%;">
         <div class="row my-2">
             <div class="col-lg-12 order-lg-2">

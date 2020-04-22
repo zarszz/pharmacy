@@ -81,6 +81,13 @@
                     <input type="password" class="form-control" id="password" placeholder="Masukkan password" name="password">
                 </div>
             <?php endif ?>
+            <?php if ($action == 'UPDATE USER') : ?>
+                <div class="form-group">
+                    <label for="saldo">Saldo User</label>
+                    <p class="text-danger">Saldo user saat ini : Rp.<?php echo number_format($saldo); ?></p>
+                    <input type="number" class="form-control" id="saldo" placeholder="Masukkan saldo" name="saldo">
+                </div>
+            <?php endif ?>
             <?php if ($_SESSION['role'] == 'admin'): ?>
                 <div class="form-group">
                     <label for="nama">Jenis Role</label>

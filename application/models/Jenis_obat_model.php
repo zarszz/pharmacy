@@ -26,7 +26,7 @@ class Jenis_obat_model extends CI_Model
 
     public function get_jenis_obat()
     {
-        $this->db->select('jenis_obat');
+        $this->db->select('jenis_obat, id_jenis');
         return $this->db->get($this->_table)->result_array();
     }
 

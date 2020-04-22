@@ -1,5 +1,5 @@
 <?php $data['title'] = $title; $this->load->view('template/header', $data); ?>
-<?php $this->load->view('template/navbar.php', $jenis_obat); ?>
+<?php $this->load->view('template/navbar.php'); ?>
 <body>
     <!-- <?php foreach ($obats as $obat):
         echo $obat->nama_obat . '<br/>';

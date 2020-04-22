@@ -1,13 +1,15 @@
 <?php $data['title'] = 'HOME PAGE'; $this->load->view('template/header', $data); ?>
 <body>
-    <?php $this->load->view('template/navbar',$jenis_obat); ?>
+    <?php $this->load->view('template/navbar'); ?>
     <!-- Page Content -->
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
                 <h1 class="my-4">@POTIK</h1>
                 <div class="list-group">
-                    <?php foreach($jenis_obat as $data): ?>
+                    <?php
+                    $jenis_obat= $this->Jenis_obat_model->get_jenis_data_complete();
+                    foreach($jenis_obat as $data): ?>
                         <a href="<?php echo base_url() . 'public/obat/show_obat_by_jenis/' . $data['id_jenis']; ?>" class="list-group-item"><?php echo $data['jenis_obat'] ?></a>
                     <?php endforeach ?>
                 </div>
@@ -42,7 +44,7 @@
                 </div>
                 <div class="row">
                     <?php foreach($data_obat as $obat): ?>
-                        <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="col-lg-4 col-md-6 mb-4 shadow-sm">
                             <div class="card h-100">
                             <a href="<?php echo base_url() . 'public/obat/show_obat/' . $obat['id_obat']; ?>">
                                 <?php if (isset($obat['foto_obat'])): ?>
@@ -65,7 +67,7 @@
                                     </h4>
                                     <h5>Rp.<?php echo number_format($obat['harga']); ?></h5>
                                     <p class="card-text"><?php echo substr($obat['deskripsi'], 0, 82); ?></p>
-                                </div>3
+                                </div>
                             </div>
                         </div>
                     <?php endforeach ?>

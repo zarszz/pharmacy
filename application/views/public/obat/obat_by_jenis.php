@@ -1,6 +1,6 @@
 <?php $data['title'] = 'HOME PAGE'; $this->load->view('template/header', $data); ?>
 <body>
-<?php $this->load->view('template/navbar', $jenis_obat); ?>
+<?php $this->load->view('template/navbar'); ?>
 <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -21,13 +21,13 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+                            <img class="d-block img-fluid" src="<?php echo base_url('assets/public/slider/medi-call-banner.jpg');?>">
                         </div>
                         <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+                            <img class="d-block img-fluid" src="<?php echo base_url('assets/public/slider/banner-mask-update.jpg');?>">
                         </div>
                         <div class="carousel-item">
-                        <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+                            <img class="d-block img-fluid" src="<?php echo base_url('assets/public/slider/suplement-banner.jpg');?>">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

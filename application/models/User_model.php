@@ -60,8 +60,8 @@ class User_model extends CI_Model {
             "email" => $this->input->post('email', true),
             "nama" => $this->input->post('nama', true),
             "alamat" => $this->input->post('alamat', true),
-            "jenis_kelamin" => $this->input->post('jenis_kelamin', true)
-
+            "jenis_kelamin" => $this->input->post('jenis_kelamin', true),
+            "saldo" => $this->input->post('saldo', true)
         ];
         $this->db->where('id_user', $id_user);
         $this->db->update($this->_table, $data);

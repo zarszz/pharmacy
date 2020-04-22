@@ -12,7 +12,7 @@
             <span>Dashboard</span>
           </a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url('admin/Admin_dashboard/obat_dashboard'); ?>">
             <i class="fas fa-fw fa-tablets"></i>
             <span>Manage Obat</span></a>
@@ -27,7 +27,7 @@
             <i class="fas fa-fw fa-user"></i>
             <span>Manage User</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
         <a class="nav-link" href="<?php echo base_url('admin/Admin_dashboard/cart_dashboard'); ?>">
             <i class="fas fa-fw fa-shopping-cart"></i>
             <span>Manage Cart</span></a>
@@ -35,50 +35,47 @@
       </ul>
 
       <div id="content-wrapper">
+
         <div class="container-fluid">
+
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
               <a href="<?php echo base_url('admin'); ?>">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Manage Obat</li>
+            <li class="breadcrumb-item active">Manage Cart</li>
           </ol>
-
         <!-- DataTables Example -->
         <div class="card mb-3">
-            <div class="card-header">
-              <a href="<?php echo base_url() . 'index.php/admin/obat/create'; ?>" class="btn btn-primary">
-               <div class="fas fa-fw fa-plus"></div> Tambah Obat
-              </a>
-              </div>
             <div class="card-body">
               <div class="table-responsive">
-              <table class="table table-striped table-bordered" id="table_contents">
-              <thead>
-                    <tr>
+                <table class="table table-striped table-bordered" id="table_contents">
+                  <thead>
+                      <tr>
+                        <th>ID CART</th>
+                        <th>ID USER</th>
                         <th>ID OBAT</th>
-                        <th>ID JENIS</th>
                         <th>NAMA OBAT</th>
                         <th>HARGA</th>
-                        <th>STOK</th>
-                        <th>ACTION</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
+                        <th>AKSI</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                      <tr>
+                        <th>ID CART</th>
+                        <th>ID USER</th>
                         <th>ID OBAT</th>
-                        <th>ID JENIS</th>
                         <th>NAMA OBAT</th>
                         <th>HARGA</th>
-                        <th>STOK</th>
-                        <th>ACTION</th>
-                    </tr>
-                </tfoot>
-                <tbody></tbody>
-            </table>
+                        <th>AKSI</th>
+                      </tr>
+                  </tfoot>
+                  <tbody></tbody>
+                </table>
               </div>
             </div>
           </div>
+
         </div>
         <!-- /.container-fluid -->
 
@@ -86,7 +83,7 @@
         <footer class="sticky-footer">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright © @POTIK</span>
+              <span>Copyright © @potik</span>
             </div>
           </div>
         </footer>
@@ -107,27 +104,20 @@
         $(document).ready(function(){
             table = $('#table_contents').DataTable({
                 "ajax": {
-                    "url": "<?php echo base_url('index.php/admin/obat/ajax') ?>",
+                    "url": "<?php echo base_url('index.php/admin/Obat/ajax_cart') ?>",
                     "type": "POST"
                 },
                 "columns": [
+                    { "data": "id_cart"},
+                    { "data": "id_user"},
                     { "data": "id_obat"},
-                    { "data": "id_jenis"},
                     { "data": "nama_obat"},
                     { "data": "harga"},
-                    { "render": function(data, type, row) {
-                                    if(row.stok == 0){
-                                        return 'kosong'
-                                    } else {
-                                        return row.stok
-                                    }
-                                }
-                    },
                     {
                         "render": function(data, type, row){
-                            update_link = `<?php echo base_url('admin/obat/edit/') ?>${row.id_obat}`
+                            update_link = `<?php echo base_url('admin/Obat/edit_cart/')?>${row.id_user}`
                             html = `<a href = ${update_link} class="btn btn-primary btn-sm">EDIT</a> | `;
-                            html += `<button type="submit" class="btn btn-danger btn-sm" id="remove" value=${row.id_obat}>DELETE</input>`;
+                            html += `<button type="submit" class="btn btn-danger btn-sm" id="remove" value=${row.id_user}>DELETE</input>`;
                             return html;
                         }
                     }
@@ -151,7 +141,7 @@
             }).then((result) => {
                 if(result.value){
                     $.ajax({
-                        url: `<?php echo base_url('admin/obat/delete_ajax/') ?>${id}`,
+                        url: '',//"<?php echo base_url('/public/user/delete_ajax/'); ?>" + id,
                         type: "GET",
                         success: function (){
                             table.ajax.reload();

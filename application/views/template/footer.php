@@ -48,13 +48,6 @@
 
       <!-- Grid column -->
       <div class="col-md-7 col-lg-8">
-
-        <!--Copyright-->
-        <p class="text-center text-md-left">© 2020 Copyright:
-          <a href="https://mdbootstrap.com/">
-            <strong> MDBootstrap.com</strong>
-          </a>
-          modified by
           <a href="<?php echo base_url() ?>">
             <strong>@apotik</strong>
           </a>

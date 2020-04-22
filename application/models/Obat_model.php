@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Obat_model extends CI_Model
 {
     private $_table = 'obat';
+    private $_table_cart = 'cart';
 
     public function insert_new($id_jenis, $foto_obat)
     {
@@ -18,6 +19,16 @@ class Obat_model extends CI_Model
             "foto_obat" => $foto_obat
         ];
         $this->db->insert($this->_table, $data);
+    }
+
+    public function insert_cart($nama,$user,$harga, $id_obat){
+        $data = [
+            "id_user" => $user,
+            "nama_obat" => $nama,
+            "harga" => $harga,
+            "id_obat" => $id_obat
+        ];
+        $this->db->insert($this->_table_cart, $data);
     }
 
     public function get_obat_by_id($id_obat)
@@ -44,6 +55,12 @@ class Obat_model extends CI_Model
     public function get_obat_by_offset($number, $offset)
     {
         return $this->db->get($this->_table, $number, $offset)->result_array();
+    }
+
+    public function get_like_data($query)
+    {
+        $this->db->like('nama_obat', $query);
+        return $this->db->get($this->_table)->result_array();
     }
 
     public function count_all_data()
@@ -76,6 +93,13 @@ class Obat_model extends CI_Model
         ];
         $this->db->where('id_obat', $id);
         $this->db->update($this->_table, $data);
+    }
+
+    public function update_stock($id, $stock)
+    {
+        $this->db->set('stok', $stock);
+        $this->db->where('id_obat', $id );
+        $this->db->update($this->_table);
     }
 
     public function delete($id_obat)
