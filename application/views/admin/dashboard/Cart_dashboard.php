@@ -115,10 +115,8 @@
                     { "data": "harga"},
                     {
                         "render": function(data, type, row){
-                            update_link = `<?php echo base_url('admin/Obat/edit_cart/')?>${row.id_user}`
-                            html = `<a href = ${update_link} class="btn btn-primary btn-sm">EDIT</a> | `;
-                            html += `<button type="submit" class="btn btn-danger btn-sm" id="remove" value=${row.id_user}>DELETE</input>`;
-                            return html;
+                            var button = `<button type="submit" class="btn btn-danger btn-sm" id="remove" value=${row.id_cart}>DELETE</button>`;
+                            return button;
                         }
                     }
                 ]
@@ -141,7 +139,7 @@
             }).then((result) => {
                 if(result.value){
                     $.ajax({
-                        url: '',//"<?php echo base_url('/public/user/delete_ajax/'); ?>" + id,
+                        url: "<?php echo base_url('/admin/Obat/delete_cart_ajax/'); ?>" + id ,
                         type: "GET",
                         success: function (){
                             table.ajax.reload();
@@ -164,5 +162,4 @@
         })
     </script>
   </body>
-
 </html>
