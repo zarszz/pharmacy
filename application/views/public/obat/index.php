@@ -108,9 +108,15 @@
                             </div>
                             <!-- row.// -->
                             <hr>
-                            <a href="<?php echo base_url() . 'public/Obat/add_obat_to_cart/' . $obat['id_obat']?>" class="btn btn-lg btn-outline-primary text-uppercase">
-                                <i class="fas fa-shopping-cart"></i> Add to cart
-                            </a>
+                            <?php if ($obat['stok'] > 0): ?>
+                                <a href="<?php echo base_url() . 'public/Obat/add_obat_to_cart/' . $obat['id_obat']?>" class="btn btn-lg btn-outline-primary text-uppercase">
+                                    <i class="fas fa-shopping-cart"></i> Add to cart
+                                </a>
+                            <?php else: ?>
+                                <a href="<?php echo base_url() . 'public/Obat/add_obat_to_cart/' . $obat['id_obat']?>" class="btn btn-lg disabled btn-secondary text-uppercase">
+                                    <i class="fas fa-shopping-cart"></i> Maaf.. Stok habis
+                                </a>
+                            <?php endif ?>
                         </article>
                         <!-- card-body.// -->
                     </aside>

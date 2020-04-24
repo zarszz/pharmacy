@@ -160,9 +160,24 @@ class Obat extends CI_Controller {
 		}
 	}
 
-	public function delete_cart_ajax($id)
+	public function delete_cart_ajax($id_cart)
 	{
-
+		if($this->is_has_privilege()) {
+			if($this->Cart_model->delete_cart($id_cart)){
+				$callback = array(
+					'status' => 'success'
+				);
+				header('Content-Type: application/json');
+				echo json_encode($callback);
+			} else {
+				header('Content-Type: application/json');
+				echo json_encode(['status' => 'error']);
+			}
+        } else {
+			$this->output->set_status_header('404');
+			header('Content-Type: application/json');
+			echo json_encode(['error' => 'not found']);
+		}
 	}
 
 	private function get_upload_config()

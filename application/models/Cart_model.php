@@ -62,5 +62,11 @@ class Cart_model extends CI_Model{
         return $this->db->count_all($this->_table_cart);
     }
 
+    public function delete_cart($id_cart)
+    {
+        $this->db->where('id_cart', $id_cart);
+        return $this->db->delete($this->_table_cart);
+    }
+
 }
 ?>
